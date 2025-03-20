@@ -12,3 +12,30 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Tasks {
+  id     Int   @id @default(autoincrement())
+  title  String  @db.VarChar(100)
+  description String
+  dueDate  DateTime
+  priority TaskPriority
+  status   TaskStatus @default(TODO)
+
+  @@index([dueDate])
+  @@index([status])
+  @@index([priority])
+}
+
+enum TaskStatus{
+  TODO
+  INPROGRESS
+  INPREVIEW
+  CANCEL
+  COMPLETE
+}
+
+enum TaskPriority{
+  LOW
+  MEDIUM
+  HIGH
+}
