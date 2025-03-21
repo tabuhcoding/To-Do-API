@@ -7,12 +7,14 @@ import { PrismaModule } from './infrastructure/database/prisma/prisma.module';
 import { IORedisModule } from './infrastructure/redis/ioredis.module';
 import { EmailModule } from './infrastructure/adapters/email/email.module';
 import { NotifyCationModule } from './modules/notification/notification.module';
+import { ScheduleModule } from '@nestjs/schedule';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // Makes ConfigService globally available
-      envFilePath: '.env', // Path to .env file
+      isGlobal: true,
+      envFilePath: '.env',
     }),
+    ScheduleModule.forRoot(),
     ConfigModule,
     PrismaModule,
     IORedisModule,
