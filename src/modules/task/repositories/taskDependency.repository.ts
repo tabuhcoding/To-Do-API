@@ -135,5 +135,21 @@ export class TaskDependencyRepository {
   
     return dfs(startNode);
   }
+
+  async removeTaskDependencies(taskId: number, dependOnTaskId: number): Promise<Result<boolean, Error>> {
+    try {
+      await this.prisma.taskDependency.delete({
+        where: {
+          taskId_dependOnTaskId: {
+            taskId,
+            dependOnTaskId,
+          },
+        },
+      });
+      return Ok(true);
+    } catch (error) {
+      return Err(new Error("Error removing task dependencies."));
+    }
+  }
   
 }
