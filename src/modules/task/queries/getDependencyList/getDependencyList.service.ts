@@ -16,15 +16,12 @@ export class GetDependencyListService {
     try {
       const cachedData = await redisClient.get(cacheKey);
       if (cachedData) {
-        console.log('📌 Fetching dependencies from cache');
-        console.log(cachedData);
         return Ok(JSON.parse(cachedData));
       }
 
       const tasks = await this.taskDependencyRepository.getAllDependencies(taskId);
 
       await redisClient.set(cacheKey, JSON.stringify(tasks), 'EX', 24 * 60 * 60);
-      console.log('✅ Dependencies cached');
 
       return Ok(tasks);
     } catch (error) {

@@ -42,6 +42,10 @@ model TaskDependency {
   DependOnTask Tasks @relation("TaskDependents", fields: [dependOnTaskId], references: [id], onDelete: Cascade)
 }
 
+model UserEmail{
+  email  String  @unique
+}
+
 
 enum TaskStatus{
   TODO
