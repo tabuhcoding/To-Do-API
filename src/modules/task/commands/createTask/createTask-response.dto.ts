@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { TaskStatus, TaskPriority } from '@prisma/client';
+import { BaseResponse } from 'src/shared/response/base-response';
 
 export class CreateTaskResponseDto {
   @ApiProperty({ example: 1, description: 'Task ID' })
@@ -21,12 +22,12 @@ export class CreateTaskResponseDto {
   status: TaskStatus;
 }
 
-export class CreateTaskResponse {
-  @ApiProperty({ example: 201, description: 'HTTP status code' })
-  statusCode: number;
+export class CreateTaskResponse extends  BaseResponse {
+  // @ApiProperty({ example: 201, description: 'HTTP status code' })
+  // statusCode: number;
 
-  @ApiProperty({ example: 'Task created successfully', description: 'Success message' })
-  message: string;
+  // @ApiProperty({ example: 'Task created successfully', description: 'Success message' })
+  // message: string;
 
   @ApiProperty({ type: CreateTaskResponseDto, description: 'Created task details' })
   task: CreateTaskResponseDto;

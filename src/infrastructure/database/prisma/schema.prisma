@@ -20,6 +20,7 @@ model Tasks {
   dueDate  DateTime
   priority TaskPriority
   status   TaskStatus @default(TODO)
+  isDelete Boolean    @default(false)
 
   @@index([dueDate])
   @@index([status])
