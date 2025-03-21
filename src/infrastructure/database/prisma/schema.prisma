@@ -32,10 +32,13 @@ enum TaskStatus{
   INPREVIEW
   CANCEL
   COMPLETE
+
+  @@map("TaskStatus")
 }
 
 enum TaskPriority{
   LOW
   MEDIUM
   HIGH
+  @@map("TaskPriority")
 }

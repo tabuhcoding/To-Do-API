@@ -2,6 +2,8 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { TaskModule } from './modules/task/task.module';
+import { PrismaModule } from './infrastructure/database/prisma/prisma.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -9,6 +11,9 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: '.env', // Path to .env file
     }),
     ConfigModule,
+    PrismaModule,
+    TaskModule,
+
   ],
   providers: [
   ]
