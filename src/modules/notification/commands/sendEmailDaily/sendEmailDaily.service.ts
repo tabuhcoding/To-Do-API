@@ -12,9 +12,9 @@ export class SendEmailDailyService {
     private readonly emailService: EmailService,
   ) {}
 
-  // @Cron(CronExpression.EVERY_DAY_AT_8AM)
+  @Cron(CronExpression.EVERY_DAY_AT_8AM)
   // @Cron('*/2 * * * *')
-  @Cron('41 20 * * 5')
+  // @Cron('41 20 * * 5')
   async sendDailyTaskReminders() {
     this.logger.log('🔔 Running daily task reminder cron job...');
 
