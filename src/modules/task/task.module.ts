@@ -11,6 +11,8 @@ import { GetTasksListService } from './queries/getTaskList/getTaskList.service';
 import { AddDependencyController } from './commands/addDependency/addDependency.controller';
 import { TaskDependencyRepository } from './repositories/taskDependency.repository';
 import { AddDependencyService } from './commands/addDependency/addDependency.service';
+import { GetDependencyListController } from './queries/getDependencyList/getDependencyList.controller';
+import { GetDependencyListService } from './queries/getDependencyList/getDependencyList.service';
 
 @Module({
   controllers: 
@@ -21,6 +23,7 @@ import { AddDependencyService } from './commands/addDependency/addDependency.ser
       DeleteTaskController,
 
       AddDependencyController,
+      GetDependencyListController,
     ],
   providers: 
     [
@@ -30,6 +33,7 @@ import { AddDependencyService } from './commands/addDependency/addDependency.ser
       DeleteTaskService,
 
       AddDependencyService,
+      GetDependencyListService,
 
       TasksRepository,
       TaskDependencyRepository,

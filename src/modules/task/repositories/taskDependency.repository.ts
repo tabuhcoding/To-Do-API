@@ -67,23 +67,35 @@ export class TaskDependencyRepository {
   }
   
   
-  async getAllDependencies(taskId: number, visited = new Set<number>()): Promise<number[]> {
-    if (visited.has(taskId)) return []; 
-    visited.add(taskId);
+  async getAllDependencies(taskId: number, visited = new Set<number>(), level = 0): Promise<string> {
+    try {
+      if (visited.has(taskId)) return ""; 
+      visited.add(taskId);
   
-    const dependencies = await this.prisma.taskDependency.findMany({
-      where: { taskId },
-      select: { dependOnTaskId: true },
-    });
+      const dependencies = await this.prisma.taskDependency.findMany({
+        where: { taskId: taskId >> 0 },
+        select: { dependOnTaskId: true },
+      });
   
-    let allDependencies: number[] = dependencies.map(dep => dep.dependOnTaskId);
+      if (dependencies.length === 0) return ""; 
   
-    for (const dep of allDependencies) {
-      const subDeps = await this.getAllDependencies(dep, visited);
-      allDependencies.push(...subDeps);
+      let dependencyList: string[] = [];
+  
+      for (const dep of dependencies) {
+        const depStr = `${dep.dependOnTaskId} (${taskId})`;
+        dependencyList.push(depStr);
+  
+        const subDeps = await this.getAllDependencies(dep.dependOnTaskId, visited, level + 1);
+        if (subDeps) {
+          dependencyList.push(`-> ${subDeps}`);
+        }
+      }
+  
+      return dependencyList.join(" ");
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error getting all dependencies");
     }
-  
-    return [...new Set(allDependencies)];
   }
   
   async checkCircularDependencyDFS(taskId: number, dependOnTaskId: number): Promise<boolean> {
