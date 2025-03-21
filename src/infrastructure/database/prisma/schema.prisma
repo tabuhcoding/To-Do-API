@@ -14,18 +14,34 @@ datasource db {
 }
 
 model Tasks {
-  id     Int   @id @default(autoincrement())
-  title  String  @db.VarChar(100)
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(100)
   description String
-  dueDate  DateTime
-  priority TaskPriority
-  status   TaskStatus @default(TODO)
-  isDelete Boolean    @default(false)
+  dueDate     DateTime
+  priority    TaskPriority
+  status      TaskStatus @default(TODO)
+  isDelete    Boolean    @default(false)
+
+  // Mối quan hệ một task có thể phụ thuộc vào nhiều task khác
+  dependencies   TaskDependency[] @relation("TaskDependencies")
+  dependents     TaskDependency[] @relation("TaskDependents")
 
   @@index([dueDate])
   @@index([status])
   @@index([priority])
 }
+
+model TaskDependency {
+  taskId         Int
+  dependOnTaskId Int
+
+  @@unique([taskId, dependOnTaskId])
+
+  // Liên kết đến bảng Tasks (task phụ thuộc vào task khác)
+  Task         Tasks @relation("TaskDependencies", fields: [taskId], references: [id], onDelete: Cascade)
+  DependOnTask Tasks @relation("TaskDependents", fields: [dependOnTaskId], references: [id], onDelete: Cascade)
+}
+
 
 enum TaskStatus{
   TODO

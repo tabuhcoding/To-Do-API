@@ -8,6 +8,9 @@ import { UpdateTaskController } from './commands/updateTask/updateTask.controlle
 import { UpdateTaskService } from './commands/updateTask/updateTask.service';
 import { GetTasksListController } from './queries/getTaskList/getTaskList.controller';
 import { GetTasksListService } from './queries/getTaskList/getTaskList.service';
+import { AddDependencyController } from './commands/addDependency/addDependency.controller';
+import { TaskDependencyRepository } from './repositories/taskDependency.repository';
+import { AddDependencyService } from './commands/addDependency/addDependency.service';
 
 @Module({
   controllers: 
@@ -16,6 +19,8 @@ import { GetTasksListService } from './queries/getTaskList/getTaskList.service';
       CreateTaskController,
       UpdateTaskController,
       DeleteTaskController,
+
+      AddDependencyController,
     ],
   providers: 
     [
@@ -24,7 +29,10 @@ import { GetTasksListService } from './queries/getTaskList/getTaskList.service';
       UpdateTaskService,
       DeleteTaskService,
 
+      AddDependencyService,
+
       TasksRepository,
+      TaskDependencyRepository,
     ],
 })
 export class TaskModule {}

@@ -11,12 +11,12 @@ export class UpdateTaskService {
   async updateTask(id: number, dto: UpdateTaskDto): Promise<Result<UpdateTaskResponseDto, Error>> {
     try {
       if (!id || isNaN(id)) {
-        throw new Error('Invalid Task ID');
+        return Err(new Error('Invalid task ID'));
       }
       
       const task = await this.tasksRepository.updateTask(id, dto);
       if (!task) {
-        throw new Error('Task not found or failed to update');
+        return Err(new Error('Task not found or failed to update'));
       }
 
       return Ok(task);

@@ -12,7 +12,7 @@ export class CreateTaskService {
     try{
       const task = await this.tasksRepository.createTask(dto);
       if (!task) {
-        throw new Error('Error creating task');
+        return Err(new Error('Failed to create task.'));
       }
       return Ok(task);
     } catch (error) {
