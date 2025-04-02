@@ -45,7 +45,7 @@ COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 # COPY .env ./.env
 
 # Mở cổng ứng dụng
-EXPOSE 3001
+EXPOSE 8000
 
 # Tự động chạy migration khi container khởi động
 CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
