@@ -19,7 +19,7 @@ async function bootstrap() {
   // console.log('Allowed origins:', allowedOrigins); 
 
   // app.enableCors({
-  //   origin: allowedOrigins,
+  //   origin: '*',
   //   credentials: true,
   //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   //   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
@@ -27,8 +27,10 @@ async function bootstrap() {
   //   optionsSuccessStatus: 204,
   // });
   const port = process.env.PORT || 8000;
-
+  console.log(`🚀 Server is running on port ${port}`);
   await app.listen(port);
+  console.log(`✅ Swagger available at http://localhost:${port}/api-docs`);
+
 }
 
 bootstrap();
