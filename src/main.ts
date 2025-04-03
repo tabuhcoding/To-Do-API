@@ -18,14 +18,14 @@ async function bootstrap() {
   // const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS?.split(',') || [];
   // console.log('Allowed origins:', allowedOrigins); 
 
-  // app.enableCors({
-  //   origin: '*',
-  //   credentials: true,
-  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  //   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  //   preflightContinue: false,
-  //   optionsSuccessStatus: 204,
-  // });
+  app.enableCors({
+    origin: '*',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  });
   const port = process.env.PORT || 8000;
   console.log(`🚀 Server is running on port ${port}`);
   await app.listen(port);
