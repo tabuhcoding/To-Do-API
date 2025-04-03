@@ -7,14 +7,14 @@ export class IORedisService implements OnModuleInit, OnModuleDestroy {
   private redis: Redis;
 
   constructor(private readonly configService: ConfigService) {
-    this.redis = new Redis({
-      host: this.configService.get<string>('REDIS_HOST') || 'localhost',
-      port: parseInt(this.configService.get<string>('REDIS_PORT'), 10) || 6379,
-      password: this.configService.get<string>('REDIS_PASSWORD') || undefined,
-    });
+    // this.redis = new Redis({
+    //   host: this.configService.get<string>('REDIS_HOST') || 'localhost',
+    //   port: parseInt(this.configService.get<string>('REDIS_PORT'), 10) || 6379,
+    //   password: this.configService.get<string>('REDIS_PASSWORD') || undefined,
+    // });
 
-    this.redis.on('connect', () => console.log('✅ Connected to Redis'));
-    this.redis.on('error', (err) => console.error('❌ Redis Error:', err));
+    // this.redis.on('connect', () => console.log('✅ Connected to Redis'));
+    // this.redis.on('error', (err) => console.error('❌ Redis Error:', err));
   }
 
   async onModuleInit() {
